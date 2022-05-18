@@ -8,8 +8,8 @@ const Task = ({ task, handleCompleted, handleDelete }) => {
         <div class="card bg-base-100 border border-gray-100 lg:mx-5 my-3 shadow">
             <div class="flex justify-between items-center px-5 py-2">
                 <div>
-                    <h2 className="text-xl font-bold">{title}</h2>
-                    <p className={`${isCompleted && 'line-through'}`}>{description}</p>
+                    <h2 className={`text-xl font-bold ${isCompleted && 'line-through text-red-700'}`}>{title}</h2>
+                    <p className={`${isCompleted && 'line-through text-red-700'}`}>{description}</p>
                 </div>
                 <div class="card-actions justify-end">
                     <button onClick={() => handleCompleted(_id)} class="btn btn-circle btn-sm bg-green-500 border-none hover:bg-green-700">

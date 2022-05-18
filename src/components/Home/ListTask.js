@@ -13,12 +13,15 @@ const ListTask = ({ tasks, handleCompleted, handleDelete }) => {
             <div className='flex flex-col lg:flex-grow lg:max-h-[calc(100vh-200px)] items-center w-full'>
                 <div className="max-h-full lg:overflow-y-scroll w-full">
                     {
-                        tasks.map(task => <Task
-                            task={task}
-                            key={task._id}
-                            handleDelete={handleDelete}
-                            handleCompleted={handleCompleted}
-                        ></Task>)
+                        tasks.length === 0 ?
+                            <p className='text-gray-500 p-5 text-center'>NoTask Available</p>
+                            :
+                            tasks.map(task => <Task
+                                task={task}
+                                key={task._id}
+                                handleDelete={handleDelete}
+                                handleCompleted={handleCompleted}
+                            ></Task>)
                     }
                 </div>
             </div>
