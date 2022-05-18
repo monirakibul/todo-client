@@ -80,11 +80,7 @@ const Home = () => {
                     .then(data => {
                         const remaining = tasks.filter(item => item._id !== id);
                         setTasks(remaining);
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
+                        toast.error("Task has been Deleted")
                     })
             }
         })
