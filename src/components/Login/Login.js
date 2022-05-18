@@ -33,8 +33,8 @@ const Login = () => {
 
     return (
         <div className='flex justify-center items-center min-h-screen'>
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
+            <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
                     <h2 className="text-center text-2xl font-bold">Login</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,8 +92,8 @@ const Login = () => {
 
                     <p className='text-sm text-center mt-3'>New to ToDo List? <Link className='text-primary' to="/register">Create new Account</Link></p>
 
-                    <div class="divider">OR</div>
-                    <button onClick={() => signInWithGoogle()} class="btn btn-outline btn-secondary">CONTINUE WITH GOOGLE</button>
+                    <div className="divider">OR</div>
+                    <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-secondary">CONTINUE WITH GOOGLE</button>
                 </div>
             </div>
         </div >

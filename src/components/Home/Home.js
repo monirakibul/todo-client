@@ -1,5 +1,6 @@
 import { faRectangleList } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
@@ -11,15 +12,22 @@ import ListTask from './ListTask';
 const Home = () => {
     const [user] = useAuthState(auth)
 
+    // signout 
+    const handleSignOut = () => {
+        signOut(auth)
+    }
+
+    // getting task list 
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/task?email=${user.email}`)
+        fetch(`https://secret-ravine-37756.herokuapp.com/task?email=${user.email}`)
             .then(res => res.json())
             .then(data => setTasks(data))
     }, [tasks])
 
 
+    // task add 
     const handleTaskAdd = (e) => {
         e.preventDefault();
         const title = e.target.title.value;
@@ -34,7 +42,7 @@ const Home = () => {
         const task = { title, description, email: user.email, isDone: false };
 
         if (title && description) {
-            fetch('http://localhost:5000/add', {
+            fetch('https://secret-ravine-37756.herokuapp.com/add', {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -51,6 +59,8 @@ const Home = () => {
         }
     };
 
+
+    // delete a task 
     const handleDelete = id => {
         Swal.fire({
             title: 'Are you sure?',
@@ -62,7 +72,7 @@ const Home = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const url = `http://localhost:5000/delete/${id}`;
+                const url = `https://secret-ravine-37756.herokuapp.com/delete/${id}`;
                 fetch(url, {
                     method: 'DELETE'
                 })
@@ -81,8 +91,9 @@ const Home = () => {
     }
 
 
+    // completed a task 
     const handleCompleted = id => {
-        const url = `http://localhost:5000/completed/${id}`;
+        const url = `https://secret-ravine-37756.herokuapp.com/completed/${id}`;
         fetch(url, {
             method: 'PUT'
         })
@@ -94,7 +105,10 @@ const Home = () => {
 
     return (
         <div>
-            <h1 className='text-2xl text-[#ff4546] font-extrabold shadow-lg p-5 text-left' ><FontAwesomeIcon icon={faRectangleList} /> Todo App</h1>
+            <div className="flex justify-between items-center shadow-lg p-5 ">
+                <h1 className='text-2xl text-[#ff4546] font-extrabold ' ><FontAwesomeIcon icon={faRectangleList} /> Todo App</h1>
+                <button onClick={() => handleSignOut()} class="btn btn-outline hover:bg-[#ff4546] text-[#ff4546] border-[#ff4546] hover:border-[#ff4546]">Log out</button>
+            </div>
 
             <div className='grid grid-cols-1 lg:grid-cols-2'>
                 <AddTask handleTaskAdd={handleTaskAdd}></AddTask>
