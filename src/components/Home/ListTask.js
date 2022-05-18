@@ -14,7 +14,7 @@ const ListTask = ({ tasks, handleCompleted, handleDelete }) => {
                 <div className="max-h-full lg:overflow-y-scroll w-full">
                     {
                         tasks.length === 0 ?
-                            <p className='text-gray-500 p-5 text-center'>NoTask Available</p>
+                            <p className='text-gray-500 p-5 text-center'>No Task Available</p>
                             :
                             tasks.map(task => <Task
                                 task={task}
